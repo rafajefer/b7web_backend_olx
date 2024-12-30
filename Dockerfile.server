@@ -1,0 +1,35 @@
+# Usar imagem oficial do PHP
+FROM php:8.1-cli
+# Define os argumentos para UID e GID
+ARG UID=1000
+ARG GID=1000
+
+# Instala pacotes e extensões PHP como root
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install zip pdo_mysql
+
+# Cria grupo e usuário com UID e GID correspondentes
+RUN groupadd -g $GID www-group && \
+    useradd -u $UID -g www-group -m www-user && \
+    chown -R www-user:www-group /var/www/html
+
+# Define o usuário padrão
+USER www-user
+
+# Define o diretório de trabalho
+WORKDIR /var/www/html
+
+COPY . .
+
+# Instalar Composer
+# RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+#     php composer-setup.php && \
+#     php -r "unlink('composer-setup.php');"
+
+# RUN php composer.phar create-project laravel/laravel:^10.0 laravel
+
+ENTRYPOINT [ "php", "artisan", "serve"]
+CMD [ "--host=0.0.0.0" ]
