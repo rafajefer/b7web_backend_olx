@@ -62,7 +62,7 @@ docker exec -it server php artisan make:request CreateUserRequest
 ```
 Criando um seeder
 ```
-docker exec -it server php artisan make:controller CategoriesController
+docker exec -it server php artisan make:seeder CategoriesSeeder
 ```
 Acessando o tinker
 ```
