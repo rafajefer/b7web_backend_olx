@@ -8,6 +8,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/var/www/html
+      - .env.example:/var/www/html/.env
     networks:
       - custom_network
     depends_on:
@@ -42,7 +43,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - './mysql/data:/var/lib/mysql'
+      - './mysql_data:/var/lib/mysql'
     networks:
       - custom_network
   phpmyadmin:

@@ -31,6 +31,13 @@ docker build -t client-image:latest -f Dockerfile.client .
 docker run -it --name client-container client-image:latest /bin/bash
 ```
 
+#### Acessar os Serviços:
+
+Aplicação: http://localhost:8000<br />
+PhpMyAdmin: http://localhost:8001
+
+#### Comandos do container:
+
 Para acessar o bash de um dos containers
 ```
 docker exec -it server /bin/sh
